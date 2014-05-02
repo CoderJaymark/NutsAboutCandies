@@ -30,8 +30,8 @@ public class Ingredient {
 
 	public void setCategory(String category) {
 		switch(category) {
-		case "Nuts" : this.category = Category.NUTS;
-		case "Candies" : this.category = Category.CANDIES;
+		case "Nuts" : this.category = Category.NUTS;break;
+		case "Candies" : this.category = Category.CANDIES;break;
 		}
 	}
 
