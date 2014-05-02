@@ -49,7 +49,6 @@ public class Product {
 			break;
 		}
 		if (type == Type.PREMIUM) {
-			System.out.println("Premium!!!");
 			price = price.add(new BigDecimal(20));
 		}
 	}
@@ -75,8 +74,6 @@ public class Product {
 		int nutsCounter = 0;
 		int candiesCounter = 0;
 		for (Ingredient i : items) {
-			System.out.println("Inside items: Name : " + i.getName() + " "
-					+ "Category : " + i.getCategory());
 			if (i.getCategory().equals("Nuts"))
 				nutsCounter++;
 			else
