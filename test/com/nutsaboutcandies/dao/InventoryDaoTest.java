@@ -31,6 +31,7 @@ public class InventoryDaoTest {
 		product.setType("Regular");
 		product.setName("Kings");
 		product.setSize("Small");
+		product.setStock(20);
 		product.setItems(items);
 		
 //		assertTrue(inventoryDao.addProduct(product));
@@ -63,6 +64,11 @@ public class InventoryDaoTest {
 	@Test
 	public void retrieveProductsTest() {
 		assertNotNull(inventoryDao.retrieveProducts());
-		assertEquals(22, inventoryDao.retrieveProducts().size());
+		assertEquals(26, inventoryDao.retrieveProducts().size());
+	}
+	
+	@Test
+	public void updateStockTest() {
+		assertTrue(inventoryDao.updateStock(3, 20));
 	}
 }

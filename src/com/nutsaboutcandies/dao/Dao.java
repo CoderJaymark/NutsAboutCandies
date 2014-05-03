@@ -23,6 +23,12 @@ public class Dao {
 		}
 		
 		if(connection != null) System.out.println("Connection established");
+		try {
+			connection.setAutoCommit(false);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return connection;
 	}
 }

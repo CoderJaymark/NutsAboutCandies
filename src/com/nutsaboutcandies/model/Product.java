@@ -12,8 +12,9 @@ public class Product {
 	private Type type;
 	private int weight;
 	private int shelfLife;
+	private int stock;
 	private List<Ingredient> items;
-
+	
 	private enum Size {
 		SMALL, MEDIUM, LARGE
 	}
@@ -63,6 +64,10 @@ public class Product {
 			break;
 
 		}
+	}
+	
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public List<Ingredient> getItems() {
@@ -145,6 +150,10 @@ public class Product {
 
 	public BigDecimal getPrice() {
 		return price;
+	}
+	
+	public int getStock() {
+		return stock;
 	}
 
 }

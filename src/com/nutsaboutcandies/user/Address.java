@@ -1,19 +1,23 @@
 package com.nutsaboutcandies.user;
 
 public class Address {
-	private int unitNumber;
+	private String unitNumber;
 	private String street;
 	private String barangay;
 	private String city;
 	
-	public Address(int unitNumber, String street, String barangay, String city) {
+	public Address(String unitNumber, String street, String barangay, String city) {
 		this.unitNumber = unitNumber;
 		this.street = street;
 		this.barangay = barangay;
 		this.city = city;
 	}
 	
-	public int getUnitNumber() {
+	public Address() {
+		
+	}
+	
+	public String getUnitNumber() {
 		return unitNumber;
 	}
 	public String getStreet() {
@@ -25,7 +29,7 @@ public class Address {
 	public String getCity() {
 		return city;
 	}
-	public void setUnitNumber(int unitNumber) {
+	public void setUnitNumber(String unitNumber) {
 		this.unitNumber = unitNumber;
 	}
 	public void setStreet(String street) {
@@ -40,7 +44,7 @@ public class Address {
 	}
 	
 	public String getAddress() {
-		return "#"+unitNumber+", "+street+", "+barangay+", "+city;
+		return unitNumber+", "+street+", "+barangay+", "+city;
 	}
 	
 	

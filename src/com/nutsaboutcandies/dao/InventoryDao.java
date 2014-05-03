@@ -28,7 +28,7 @@ public class InventoryDao {
 	public boolean addProduct(Product product) {
 		if(product == null) return false;
 		query = "INSERT INTO products (name, type_id, category_id, price, size_id, "
-				+ "shelf_life, weight) VALUES(?, ?, ?, ?, ?, ?, ?)";
+				+ "shelf_life, weight, stock) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		int type_id = 0, category_id = 0, size_id = 0;
 		
 		try {
@@ -48,6 +48,7 @@ public class InventoryDao {
 			preparedStatement.setInt(5, size_id);
 			preparedStatement.setInt(6, product.getShelfLife());
 			preparedStatement.setInt(7, product.getWeight());
+			preparedStatement.setInt(8, product.getStock());
 			preparedStatement.executeUpdate();
 			connection.commit();
 			ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -251,5 +252,20 @@ public class InventoryDao {
 		}
 		
 		return items;
+	}
+	
+	public boolean updateStock(int product_id, int stock) {
+		query = "UPDATE products SET stock = ? WHERE product_id = ?";
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, stock);
+			preparedStatement.setInt(2, product_id);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 }
