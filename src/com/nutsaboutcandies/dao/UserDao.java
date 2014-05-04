@@ -53,7 +53,6 @@ public class UserDao {
 				address_id = result.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return address_id;
@@ -127,5 +126,65 @@ public class UserDao {
 		}
 		
 		return 0;
+	}
+	
+	public boolean isUserRegistered(String email) {
+		query = "SELECT email FROM users";
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			ResultSet result = preparedStatement.executeQuery();
+			while(result.next()) {
+				if(result.getString(1).equals(email))
+					return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public User retrieveUser(String email) {
+		query =  "SELECT * FROM users WHERE email = ?";
+		User user = new User();
+		int user_id = 0;
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, email);
+			ResultSet result = preparedStatement.executeQuery();
+			result.first();
+			user_id = result.getInt(1);
+			user.setFirstname(result.getString(2));
+			user.setLastname(result.getString(3));
+			user.setEmail(result.getString(4));
+			user.setContactNumber(result.getString(6));
+			user.setRegistrationTime(result.getTimestamp(9));
+			user.setLastAccessTime(result.getTimestamp(10));
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		user.setAddress(getAddress(user_id));
+		return user;
+	}
+	
+	private Address getAddress(int user_id) {
+		query = "SELECT * FROM address WHERE user_id = ?";
+		Address address = new Address();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, user_id);
+			ResultSet result = preparedStatement.executeQuery();
+			result.first();
+			address.setUnitNumber(result.getString(2));
+			address.setStreet(result.getString(3));
+			address.setBarangay(result.getString(4));
+			address.setCity(result.getString(5));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return address;
 	}
 }

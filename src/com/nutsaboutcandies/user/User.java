@@ -90,5 +90,13 @@ public class User {
 	public void setLastAccessTime() {
 		this.lastAccessTime = new Timestamp(new Date().getTime());
 	}
+	
+	public void setRegistrationTime(Timestamp registrationTime) {
+		this.registrationTime = registrationTime;
+	}
+	
+	public void setLastAccessTime(Timestamp lastAccessTime) {
+		this.lastAccessTime = lastAccessTime;
+	}
 
 }

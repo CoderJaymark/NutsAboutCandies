@@ -53,4 +53,10 @@ public class UserDaoTest {
 		user.setAddress(address);
 		assertTrue(dao.updateUser(user, 1));
 	}
+	
+	@Test
+	public void isUserRegisteredTest() {
+		
+		assertTrue(dao.isUserRegistered("jay@1n1ac.com"));
+	}
 }
