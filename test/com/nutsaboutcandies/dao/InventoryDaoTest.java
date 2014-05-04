@@ -30,11 +30,11 @@ public class InventoryDaoTest {
 		
 		product.setType("Regular");
 		product.setName("Kings");
-		product.setSize("Small");
+		product.setSize("Large");
 		product.setStock(20);
 		product.setItems(items);
 		
-//		assertTrue(inventoryDao.addProduct(product));
+		assertTrue(inventoryDao.addProduct(product));
 //		assertFalse(inventoryDao.addProduct(new Product()));
 	}
 //	
@@ -54,8 +54,8 @@ public class InventoryDaoTest {
 		item.setCategory("Candies");
 		items.add(item);
 		
-		product.setType("Regular");
-		product.setName("Kings");
+		product.setType("Premium");
+		product.setName("Kingss");
 		product.setSize("Small");
 		product.setItems(items);
 		assertTrue(inventoryDao.updateProduct(product, 11));

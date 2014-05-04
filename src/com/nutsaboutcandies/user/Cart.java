@@ -1,5 +1,7 @@
 package com.nutsaboutcandies.user;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,8 +9,8 @@ import com.nutsaboutcandies.model.Product;
 
 public class Cart {
 	private User owner;
-	private Date purchaseDate;
-	private List<Product> items;
+	private Timestamp purchaseDate;
+	private List<Product> items = new ArrayList<Product>();
 
 	public User getOwner() {
 		return owner;
@@ -26,7 +28,7 @@ public class Cart {
 		this.owner = owner;
 	}
 
-	public void setPurchaseDate(Date purchaseDate) {
+	public void setPurchaseDate(Timestamp purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
