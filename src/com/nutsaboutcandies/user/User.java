@@ -12,6 +12,7 @@ public class User {
 	private Address address;
 	private Timestamp registrationTime;
 	private Timestamp lastAccessTime;
+	private int roleId;
 
 	public User() {
 
@@ -97,6 +98,14 @@ public class User {
 	
 	public void setLastAccessTime(Timestamp lastAccessTime) {
 		this.lastAccessTime = lastAccessTime;
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 }

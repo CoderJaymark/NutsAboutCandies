@@ -152,11 +152,13 @@ public class UserDao {
 			preparedStatement.setString(1, email);
 			ResultSet result = preparedStatement.executeQuery();
 			result.first();
-			user_id = result.getInt(1);
+			user_id = result.getInt(7);
 			user.setFirstname(result.getString(2));
 			user.setLastname(result.getString(3));
 			user.setEmail(result.getString(4));
+			user.setPassword(result.getString(5));
 			user.setContactNumber(result.getString(6));
+			user.setRoleId(result.getInt(8));
 			user.setRegistrationTime(result.getTimestamp(9));
 			user.setLastAccessTime(result.getTimestamp(10));
 			
@@ -169,7 +171,7 @@ public class UserDao {
 	}
 	
 	private Address getAddress(int user_id) {
-		query = "SELECT * FROM address WHERE user_id = ?";
+		query = "SELECT * FROM address WHERE address_id = ?";
 		Address address = new Address();
 		try {
 			preparedStatement = connection.prepareStatement(query);

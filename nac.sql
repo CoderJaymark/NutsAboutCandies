@@ -157,6 +157,7 @@ CREATE TABLE `products` (
   `shelf_life` int(10) unsigned NOT NULL DEFAULT '0',
   `weight` int(10) unsigned NOT NULL DEFAULT '0',
   `stock` int(10) unsigned NOT NULL DEFAULT '0',
+  `image` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   UNIQUE KEY `name` (`name`,`size_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -168,7 +169,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Kings',1,1,50,1,30,50,20),(3,'Kings',1,1,150,3,30,150,20);
+INSERT INTO `products` VALUES (1,'Kings',1,1,50,1,30,50,20,NULL),(3,'Kings',1,1,150,3,30,150,20,NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-05  1:52:44
+-- Dump completed on 2014-05-11  2:22:06
