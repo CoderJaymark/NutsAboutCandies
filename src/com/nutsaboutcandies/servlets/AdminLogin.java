@@ -47,22 +47,21 @@ public class AdminLogin extends HttpServlet {
 			
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
-			System.out.println(HashMaker.makeHash(password));
 			UserDao dao = new UserDao();
 			User user = dao.retrieveUser(email);
 			
-			System.out.println(user.getPassword());
-			System.out.println(user.getRoleId() );
-			
 			if(user.getEmail() != null && user.getPassword().equals(HashMaker.makeHash(password)) && user.getRoleId() == 1) {
+				//admin is registered and have the right credentials, so put the admin in session
+				//then redirect to homepage
 				session.setAttribute("admin", email);
 				response.sendRedirect("index.jsp");
 			} else {
+				//admin have wrong credentials, go back to login
 				session.setAttribute("wrong_credentials", true);
 				response.sendRedirect("login.jsp");
 			}
 		} else {
-			System.out.println("Session for admin exists");
+			//theres an existing session for admin, so no need to login. 
 			response.sendRedirect("index.jsp");
 		}
 	}

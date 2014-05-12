@@ -14,6 +14,7 @@ public class Product {
 	private int shelfLife;
 	private int stock;
 	private List<Ingredient> items;
+	private String image;
 	
 	private enum Size {
 		SMALL, MEDIUM, LARGE
@@ -154,6 +155,14 @@ public class Product {
 	
 	public int getStock() {
 		return stock;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }

@@ -26,9 +26,12 @@ public class InventoryDao {
 	}
 
 	public boolean addProduct(Product product) {
-		if(product == null) return false;
+		if(product == null) {
+			System.out.println("qweqweqwe");
+			return false;
+		}
 		query = "INSERT INTO products (name, type_id, category_id, price, size_id, "
-				+ "shelf_life, weight, stock) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "shelf_life, weight, stock, image) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int type_id = 0, category_id = 0, size_id = 0;
 		
 		try {
@@ -36,6 +39,7 @@ public class InventoryDao {
 			category_id = product.getCategory().equals("All About Nuts")?1:product.getCategory().equals("All About Candies")?2:3;
 			size_id = product.getSize().equals("Small")?1:product.getSize().equals("Medium")?2:3;
 		} catch (NullPointerException npe) {
+			System.out.println("ERERERERER");
 			return false;
 		}
 		
@@ -49,6 +53,7 @@ public class InventoryDao {
 			preparedStatement.setInt(6, product.getShelfLife());
 			preparedStatement.setInt(7, product.getWeight());
 			preparedStatement.setInt(8, product.getStock());
+			preparedStatement.setString(9, product.getImage());
 			preparedStatement.executeUpdate();
 			connection.commit();
 			ResultSet generatedKeys = preparedStatement.getGeneratedKeys();

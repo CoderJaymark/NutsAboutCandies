@@ -28,6 +28,12 @@
     cursor: inherit;
     display: block;
 }
+
+.removeButtons, #addIngredientButton {
+	 color: #dd4814;
+  text-decoration: none;
+  cursor: pointer;
+}
 	</style>
 	<link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
@@ -71,7 +77,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="well">
-					<form class="form-horizontal" method="POST" action="../admin/add.jay"  enctype="multipart/form-data" >
+					<form class="form-horizontal" method="POST" action="../admin/product.confirmation"  enctype="multipart/form-data" >
 						<fieldset>	
 						
 							<legend>Add product</legend>
@@ -97,9 +103,9 @@
 								<div class="col-md-2">
 									<!-- <input id="product_type" name="product_type" class="form-control input-md" type="text"> -->
 									<select class="select form-control" name="product_size">
-										<option name="Regular" value="Regular">Small</option>
-										<option name="Premium" value="Premium">Medium</option>
-										<option name="Premium" value="Premium">Large</option>
+										<option value="Small">Small</option>
+										<option value="Medium">Medium</option>
+										<option value="Large">Large</option>
 									</select>
 								</div>
 								<label class="col-md-2 control-label" for="product_stock">Stock</label>  
@@ -123,15 +129,15 @@
 									<div class="col-md-4">
 										<input required id="ingredient_name" name="ingredient_name" placeholder="ingredient name" class="form-control input-md" type="text">
 									</div>
-									<label class="col-md-2 control-label" for="ingredient_type">Type</label>  
+									<label class="col-md-2 control-label" for="ingredient_category">Category</label>  
 									<div class="col-md-2">
-										<select class="select form-control" name="ingredient_type">
+										<select class="select form-control" name="ingredient_category">
 											<option name="Nut" value="Nuts">Nut</option>
 											<option name="Candy" value="Candies">Candy</option>
 										</select>
 									</div>
 									<div class="col-md-2">
-										<a href="#" id="addIngredientButton">Add more</a> <span class='glyphicon glyphicon-plus'></span> 
+										<label id="addIngredientButton">Add more</label>
 
 									</div>
 								</div>
@@ -141,8 +147,7 @@
 
 							<div class="form-group pull-right">
 								<div class="col-md-12">
-									<input class="btn btn-success btn-lg" type="submit" id="submitButton" value="Add product">
-									<label id="asd">Submit</label>
+									<input class="btn btn-success btn-lg" type="submit" value="Add product">
 								</div>
 							</div>
 						</fieldset>
@@ -151,8 +156,10 @@
 				</div>
 			</div>
 		</div>
+		
 
 	</div>
+	
 	<script type="text/javascript" src="../bootstrap/js/jquery.js"></script>
 	<script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="admin.js"></script>
