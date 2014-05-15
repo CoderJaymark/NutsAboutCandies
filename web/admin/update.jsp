@@ -138,7 +138,15 @@
 										</select>
 									</div>
 									<div class="col-md-2">
-										<label id="addIngredientButton">Add more</label>
+										<c:choose>
+											<c:when test="${counter.index eq 0 }">
+												<label id="addIngredientButton">Add more</label>
+											</c:when>
+											<c:otherwise>
+												
+											</c:otherwise>
+										</c:choose>
+										
 
 									</div>
 								</div>
