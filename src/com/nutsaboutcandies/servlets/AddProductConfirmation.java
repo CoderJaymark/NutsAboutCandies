@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nutsaboutcandies.model.Ingredient;
 import com.nutsaboutcandies.model.Product;
 import com.nutsaboutcandies.services.ProductBean;
 import com.nutsaboutcandies.utilities.ImageUploader;
@@ -30,6 +31,8 @@ public class AddProductConfirmation extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Product p = ProductBean.createProduct(request);
+		for(Ingredient i: p.getItems())
+			System.out.println(i.getName());
 		request.setAttribute("product", p);
 		ImageUploader.upload(getServletContext(), request);
 		request.getRequestDispatcher("product_confirmation.jsp").forward(request, response);

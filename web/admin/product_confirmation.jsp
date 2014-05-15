@@ -50,7 +50,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="well">
-					<form method="post" action="product.add">
+					<form method="post" action="product.add" id="formConfirm">
 						<fieldset>
 							<legend>Product confirmation</legend>
 							<table class="table">
@@ -85,36 +85,41 @@
 								<td>Stock</td>
 								<td><b>${product.stock }</b></td>
 								</tr>	
-							<tr>
+							<tr rowspan="2">
 								<td>Ingredient</td>
 								<td>
 									<c:forEach items="${product.items }" var="i">
-										<tr>
-											<td>${i.name }</td>
-											<td>${i.category }</td>
-										</tr>
+										
+											<b>${i.name } </b>( ${i.category } )
+											<br>
+											<input type="hidden" name="ingredient_name" value="${i.name }"/>
+											<input type="hidden" name="ingredient_category" value="${i.category }"/>
+										
 									</c:forEach>
 								</td>
 								</tr>	
 							<tr>
 								<td>Image</td>
-								<td><img alt="" src="../uploads/${product.image }" width = "200px" height = "200px"></td>
+								
+								
+								<td><img alt="" src="../images/uploads/${product.image }" width = "200px" height = "200px"></td>
 								</tr>
-								
 								<tr>
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
 								</tr>
 							</table>
+							<input type="hidden" name="product_name" value="${product.name }"/>
+							<input type="hidden" name="product_size" value="${product.size }"/>
+							<input type="hidden" name="product_stock" value="${product.stock }"/>
+							<input type="hidden" name="product_type" value="${product.type }"/>
+							<input type="hidden" name="hiddenFileName" value="${product.image }"/>
+							
+							<div class="pull-right">
+							
+						<input type="button" class="btn btn-warning" value="Back" onclick="window.history.back()" />
+						<input type="submit" class="btn btn-success" value="Confirm" />
+					</div>
 						</fieldset>
+						
 					</form>
 					
 				</div>

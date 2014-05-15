@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Product {
 
+	private int id;
 	private String name;
 	private BigDecimal price;
 	private Size size;
@@ -163,6 +164,14 @@ public class Product {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

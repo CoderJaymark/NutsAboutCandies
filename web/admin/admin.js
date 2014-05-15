@@ -1,5 +1,6 @@
 var removeButtonCounter = 1;
 var text = "";
+var c = false;
 $(document).ready(function(){
 	$('#addIngredientButton').click(function(){
 
@@ -16,7 +17,6 @@ $(document).ready(function(){
 		removeButtonCounter++;
 		
 	});
-
 	$('.removeButtons').click(function(){
 		alert("as");
 	});
@@ -31,6 +31,18 @@ $(document).ready(function(){
 	
 	$('#submitButton').click(function(){
 		$('#myModal').modal('show');
+		
+	});
+	
+	$('#motherCheckbox').click(function(){
+		if(!c) {
+			$(':checkbox.checkOptions').click();
+			c = true;
+		}
+		else {
+			$(':checkbox.checkOptions').removeAttr('checked');
+			c = false;
+		}
 		
 	});
 });

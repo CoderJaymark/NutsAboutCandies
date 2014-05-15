@@ -219,12 +219,14 @@ public class InventoryDao {
 			ResultSet result = preparedStatement.executeQuery();
 			while(result.next()) {
 				product = new Product();
+				product.setId(result.getInt(1));
 				product.setItems(retrieveIngredient(result.getInt(1)));
 				type = result.getInt(3) == 1?"Regular":"Premium";
 				size = result.getInt(6) == 1?"Small":result.getInt(6) == 2?"Medium":"Large";
 				product.setName(result.getString(2));
 				product.setType(type);
 				product.setSize(size);
+				product.setImage(result.getString(10));
 				products.add(product);
 			}
 		} catch (SQLException e) {
@@ -272,5 +274,34 @@ public class InventoryDao {
 		}
 		
 		return true;
+	}
+	
+	public Product retrieveProduct(int id) {
+		query = "SELECT * FROM products WHERE product_id = ?";
+		Product product = new Product();
+		String type, size;
+		
+		try {
+			
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			ResultSet result = preparedStatement.executeQuery();
+			while(result.next()) {
+				
+				product.setId(result.getInt(1));
+				product.setItems(retrieveIngredient(result.getInt(1)));
+				type = result.getInt(3) == 1?"Regular":"Premium";
+				size = result.getInt(6) == 1?"Small":result.getInt(6) == 2?"Medium":"Large";
+				product.setName(result.getString(2));
+				product.setType(type);
+				product.setSize(size);
+				product.setImage(result.getString(10));
+				product.setStock(result.getInt(9));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return product;
 	}
 }

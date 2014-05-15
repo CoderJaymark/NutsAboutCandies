@@ -24,7 +24,10 @@ public class ImageUploader {
             String filename = s.nextLine();    // read filename from stream
 
             // get filename to use on the server
-            String outputfile = context.getRealPath("") + File.separator + "uploads" + File.separator + filename;  // get path on the server
+            String uploadDirectory = context.getRealPath("") + File.separator + "images" + File.separator + "uploads";
+            File file = new File(uploadDirectory);
+            if(!file.exists()) file.mkdirs();
+            String outputfile =  uploadDirectory + File.separator + filename;  // get path on the server
             FileOutputStream os = new FileOutputStream (outputfile);
             System.out.println(outputfile);
             // write bytes taken from uploaded file to target file

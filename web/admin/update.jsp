@@ -70,9 +70,9 @@
 			<div class="col-md-3">
 				<p class="lead">Product operations</p>
 				<div class="list-group">
-					<a href="#" class="list-group-item active">Add product</a>
+					<a href="index.jsp" class="list-group-item">Add product</a>
 					<a href="products.display" class="list-group-item">Display products</a>
-					<a href="#" class="list-group-item">Update products</a>
+					<a href="#" class="list-group-item active">Update products</a>
 				</div>
 			</div>
 			<div class="col-md-9">
@@ -80,13 +80,13 @@
 					<form class="form-horizontal" method="POST" action="../admin/product.confirmation"  enctype="multipart/form-data" >
 						<fieldset>	
 						
-							<legend>Add product</legend>
-							
+							<legend>Update product</legend>
+							<c:set var="p" value="${requestScope.product }"></c:set>
 							<!-- Text input-->
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="product_name">Name</label>  
 								<div class="col-md-10">
-									<input required id="product_name" name="product_name" placeholder="Product name" class="form-control input-md" type="text">
+									<input value="${p.name }" required id="product_name" name="product_name" placeholder="Product name" class="form-control input-md" type="text">
 								</div>
 							</div>
 
@@ -95,22 +95,22 @@
 								<div class="col-md-2">
 									<!-- <input id="product_type" name="product_type" class="form-control input-md" type="text"> -->
 									<select class="select form-control" name="product_type">
-										<option name="Regular" value="Regular">Regular</option>
-										<option name="Premium" value="Premium">Premium</option>
+										<option  name="Regular" value="Regular" <c:if test="${p.type == 'Regular' }">selected</c:if>>Regular</option>
+										<option name="Premium" value="Premium" <c:if test="${p.type == 'Premium' }">selected</c:if>>Premium</option>
 									</select>
 								</div>
 								<label class="col-md-2 control-label" for="product_size">Size</label>  
 								<div class="col-md-2">
 									<!-- <input id="product_type" name="product_type" class="form-control input-md" type="text"> -->
 									<select class="select form-control" name="product_size">
-										<option value="Small">Small</option>
-										<option value="Medium">Medium</option>
-										<option value="Large">Large</option>
+										<option value="Small" <c:if test="${p.size == 'Small' }">selected</c:if> >Small</option>
+										<option value="Medium" <c:if test="${p.size == 'Medium' }">selected</c:if>>Medium</option>
+										<option value="Large" <c:if test="${p.size == 'Large' }">selected</c:if>>Large</option>
 									</select>
 								</div>
 								<label class="col-md-2 control-label" for="product_stock">Stock</label>  
 								<div class="col-md-2">
-									<input required id="product_stock" name="product_stock" class="form-control input-md" type="text">
+									<input value="${p.stock }" required id="product_stock" name="product_stock" class="form-control input-md" type="text">
 
 								</div>
 
@@ -118,22 +118,23 @@
 							<br>
 							
 							<span class="btn btn-default btn-file">Upload image for this product <input  type="file" name="fileName" id="upload" /></span>
-							<label id="imageName"> Image : None</label>
-							<input type="hidden" name="hiddenFileName" id="hiddenFileName">
+							<label id="imageName"> Image : ${p.image }</label>
+							<input type="hidden" name="hiddenFileName" id="hiddenFileName" value="${p.image }">
 							<br>
+							<div class="col-md-4 col-md-offset-4"> <img alt="" src="../images/uploads/${product.image }" width = "200px" height = "200px"></div>
 							<legend><h4>Add Ingredient</h4></legend>
 							<div id="ingredient_form">
-								<div class="form-group">
-  
+							<c:forEach items="${p.items }" var="i" varStatus="counter">
+								<div class="form-group" <c:if test="${counter.index gt 0 }">id="ingredient_${counter.index }"</c:if> >  
 									<label class="col-md-2 control-label" for="ingredient_name">Name</label>  
 									<div class="col-md-4">
-										<input required id="ingredient_name" name="ingredient_name" placeholder="ingredient name" class="form-control input-md" type="text">
+										<input value="${i.name }" required id="ingredient_name" name="ingredient_name" placeholder="ingredient name" class="form-control input-md" type="text">
 									</div>
 									<label class="col-md-2 control-label" for="ingredient_category">Category</label>  
 									<div class="col-md-2">
 										<select class="select form-control" name="ingredient_category">
-											<option name="Nut" value="Nuts">Nut</option>
-											<option name="Candy" value="Candies">Candy</option>
+											<option name="Nut" value="Nuts" <c:if test="${i.category == 'Nuts' }">selected</c:if>>Nut</option>
+											<option name="Candy" value="Candies" <c:if test="${i.category == 'Candies' }">selected</c:if>>Candy</option>
 										</select>
 									</div>
 									<div class="col-md-2">
@@ -141,7 +142,7 @@
 
 									</div>
 								</div>
-
+							</c:forEach>
 
 							</div>
 

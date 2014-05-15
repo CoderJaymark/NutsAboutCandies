@@ -39,7 +39,12 @@ public class AddProductServlet extends HttpServlet {
 		Product p = ProductBean.createProduct(request);
 		ImageUploader.upload(getServletContext(), request);
         InventoryDao dao = new InventoryDao();
-        System.out.println(dao.addProduct(p));
+        if(dao.addProduct(p)) 
+        	request.getSession().setAttribute("operation", "Success");
+        else
+        	request.getSession().setAttribute("operation", "Failed");
+        
+        request.getSession().setAttribute("productName", p.getName());
         response.sendRedirect("index.jsp");
 	}
 }
