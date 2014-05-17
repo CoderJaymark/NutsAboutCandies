@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/" source-path="/web" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
-        <property name="context-root" value="Nuts_About_Candies"/>
         <property name="java-output-path" value="/Nuts About Candies/build/classes"/>
+        <property name="context-root" value="cess_nac"/>
     </wb-module>
 </project-modules>

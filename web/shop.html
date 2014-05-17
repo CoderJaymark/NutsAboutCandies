@@ -1,0 +1,152 @@
+<html>
+<head>
+	
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+	<style type="text/css">
+		div.dataTables_filter  {
+	display: none;
+	width: 16em;
+
+}
+	</style>
+</head>
+<body  data-spy="scroll" data-target="#mynav" style="">
+	<div class="container">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Nuts About Candies</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">Home</a></li>
+						<li class="active"><a href="#">Shop</a></li>
+						<li><a href="cart.html">My Cart <span class="badge">42</span></a></li>
+						<li><a href="checkout.html">Checkout</a></li>
+						
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">Sign up</a></li>
+						<li><a href="#">Login</a></li>
+
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+		<div class="col-md-12">
+			<form class="form-horizontal" method="post" action="../admin/add.jay">
+
+				<!-- Text input-->
+				<div class="form-group">
+					<div class="input-group  col-md-4 pull-right">
+						<span style="padding:0px 4px" class="input-group-addon">Search</span>
+						<input type="search" class="form-control input-sm" id="searchBar" aria-controls="products">
+						<span class="input-group-btn">
+							<button class="btn btn-success btn-sm" type="button">Go!</button>
+						</span>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+				
+						<ul class="breadcrumb">
+						<li>Sort by</li>
+  <li><label class="sortOptions" id="name">Name</label> </li>
+  <li class="active"><label class="sortOptions" id="name">Category</label></li>
+  <li><label class="sortOptions" id="name">Type</label> </li>
+  <li><label class="sortOptions" id="name">Size</label> </li>
+  <li><label class="sortOptions" id="name">Price</label> </li>
+</ul>
+				
+				</div>
+				<div class="panel-body">
+					<table class="table table-condensed table-hover table-striped" cellspacing="0" id="products">
+				
+				<thead>
+					<tr style="display:none">
+						<td></td>
+						<td></td>
+						<td id="asd" ><strong>ID</strong></td>
+						<td><strong>Name</strong></td>
+						<td><strong>Type</strong></td>
+						<td><strong>Category</strong></td>
+						<td><strong>Price</strong></td>
+						<td><strong>Size</strong></td>
+						<td><strong>Shelf life</strong></td>
+						<td><strong>Weight</strong></td>
+						<td><strong>Image</strong></td>
+					</tr>
+				</thead>
+				<tbody>
+				<tr>
+						<td><a href="product.remove?id=${p.id }" onclick="return confirm('Are you sure you want to delete ${p.name}?')"><span class='glyphicon glyphicon-remove'></span></a></td>
+						<td><a href="product.update?id=${p.id }"><span style="color:blue;" class='glyphicon glyphicon-pencil'></span></a></td>
+						<td>${p.id}</td>
+						<td>${p.name}</td>
+						<td>${p.type}</td>
+						<td>${p.category}</td>
+						<td>${p.price}</td>
+						<td>${p.size}</td>
+						<td>${p.shelfLife}</td>
+						<td>${p.weight}</td>
+						<td><img alt="" src="../images/uploads/${p.image}" width="50px" height="50px"></td>
+					</tr>
+
+					<tr>
+						<td><a href="product.remove?id=${p.id }" onclick="return confirm('Are you sure you want to delete ${p.name}?')"><span class='glyphicon glyphicon-remove'></span></a></td>
+						<td><a href="product.update?id=${p.id }"><span style="color:blue;" class='glyphicon glyphicon-pencil'></span></a></td>
+						<td>3</td>
+						<td>${p.naqweme}</td>
+						<td>${p.tyqwepe}</td>
+						<td>$qwe{p.qwecategory}</td>
+						<td>qwe${p.price}</td>
+						<td>qwe${p.size}</td>
+						<td>qwe${p.shelfLife}</td>
+						<td>qwe${p.weight}</td>
+						<td><img alt="" src="../images/uploads/${p.image}" width="50px" height="50px"></td>
+					</tr>
+				</tbody>
+				</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	<script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="bootstrap/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="bootstrap/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#dataTableSearch').remove();
+	    $('#products').dataTable();
+	    $('#qwe').click(function(){
+	    	$('#asd').click();
+	    });
+	    $('#searchBar').keydown(function(e){
+	    	// alert(e.text);
+	    	// $('#dataTableSearch').trigger(e.which);
+	    	$('#dataTableSearch').val($('#searchBar').val());
+	    	$('#dataTableSearch').focus();
+	    	// $('#searchBar').focus();
+	    });
+	} );
+	</script>
+</body>
+</html>
