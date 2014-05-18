@@ -13,8 +13,8 @@ public class ProductBean {
 		Product p = new Product();
 		List<Ingredient> items = new ArrayList<Ingredient>();
 		
-		
-		p.setId(Integer.parseInt(req.getParameter("id")));
+		if(req.getParameter("id")!=null)
+			p.setId(Integer.parseInt(req.getParameter("id")));
 		p.setName(req.getParameter("product_name"));
 		p.setSize(req.getParameter("product_size"));
 		p.setStock(Integer.parseInt(req.getParameter("product_stock")));
