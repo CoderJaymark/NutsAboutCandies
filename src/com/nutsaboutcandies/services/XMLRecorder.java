@@ -8,7 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
+
+import com.nutsaboutcandies.user.Cart;
 
 
 public class XMLRecorder {
@@ -21,19 +22,49 @@ public class XMLRecorder {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void saveCart(Cart cart, String filename) {
+		XMLEncoder encoder = null;
+		try {
+			encoder = new XMLEncoder(new BufferedOutputStream(
+					new FileOutputStream(filename)));
+			encoder.writeObject(cart);
+			encoder.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public static Cart retrieveCart(String filename) {
+		XMLDecoder decoder = null;
+		if(!new File(filename).exists()){
+			return new Cart();
+		}
+		try {
+			decoder = new XMLDecoder(new BufferedInputStream(
+					new FileInputStream(filename)));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			decoder.close();
+		}
+		Cart cart = null;
+		try{
+		cart = (Cart) decoder.readObject();
+		} catch (ArrayIndexOutOfBoundsException e) {
+			cart = new Cart();
+			return cart;
+		}
+		if(cart==null) cart = new Cart();
+		return cart;
 
 	}
 
 	public static Inventory retrieve() {
 		XMLDecoder decoder = null;
-//		File file = new File("c:\\nac\\Inventory.xml");
-//		if(!file.exists()) {
-//			try {
-//				file.createNewFile();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
+
 		try {
 			decoder = new XMLDecoder(new BufferedInputStream(
 					new FileInputStream("c:\\nac\\Inventory.xml")));

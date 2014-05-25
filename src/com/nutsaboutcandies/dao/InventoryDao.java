@@ -226,6 +226,7 @@ public class InventoryDao {
 				product.setName(result.getString(2));
 				product.setType(type);
 				product.setSize(size);
+				product.setStock(result.getInt(9));
 				product.setImage(result.getString(10));
 				products.add(product);
 			}
@@ -303,5 +304,55 @@ public class InventoryDao {
 			return null;
 		}
 		return product;
+	}
+	
+	public boolean removeStock(int product_id, int stock) {
+		if(getStock(product_id) <= 0) 
+			return false;
+		query = "UPDATE products SET stock = stock - ? where product_id = ?";
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, stock);
+			preparedStatement.setInt(2, product_id);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	public int getStock(int product_id) {
+		int stock = 0;
+		query = "SELECT stock from products WHERE product_id = ?";
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, product_id);
+			ResultSet result = preparedStatement.executeQuery();
+			while(result.next()) {
+				stock = result.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return stock;
+	}
+	
+	public boolean addStock(int product_id, int stock) {
+		if(getStock(product_id) <= 0) 
+			return false;
+		query = "UPDATE products SET stock = stock + ? where product_id = ?";
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, stock);
+			preparedStatement.setInt(2, product_id);
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
 	}
 }

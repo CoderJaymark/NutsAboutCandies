@@ -4,11 +4,14 @@
 	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 	<style type="text/css">
-		div.dataTables_filter  {
-	display: none;
-	width: 16em;
+		.sortOptionsLabel {
+			font-weight: normal;
+			cursor:pointer;
+		}
 
-}
+		.tooltipImages {
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body  data-spy="scroll" data-target="#mynav" style="">
@@ -44,10 +47,9 @@
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
-		<div class="col-md-12">
+		<div class="row col-md-10 col-md-offset-1">
 			<form class="form-horizontal" method="post" action="../admin/add.jay">
 
-				<!-- Text input-->
 				<div class="form-group">
 					<div class="input-group  col-md-4 pull-right">
 						<span style="padding:0px 4px" class="input-group-addon">Search</span>
@@ -59,100 +61,103 @@
 				</div>
 			</form>
 		</div>
+		<div class="row col-md-10 col-md-offset-1">
 
-		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-success">
-				<div class="panel-heading">
-				
+			<div class="col-md-9">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+
 						<ul class="breadcrumb">
-						<li>Sort by</li>
-  <li><label class="sortOptions" id="name">Name</label> </li>
-  <li class="active"><label class="sortOptions" id="name">Category</label></li>
-  <li><label class="sortOptions" id="name">Type</label> </li>
-  <li><label class="sortOptions" id="name">Size</label> </li>
-  <li><label class="sortOptions" id="name">Price</label> </li>
-</ul>
-				
+							<li>Sorted by</li>
+							<li class="sortOptions" ><label  id="sortByName" class="sortOptionsLabel">Name</label> </li>
+							<li class="sortOptions" ><label  id="sortByCategory" class="sortOptionsLabel">Category</label></li>
+							<li class="sortOptions" ><label  id="sortByType" class="sortOptionsLabel">Type</label> </li>
+							<li class="sortOptions" ><label  id="sortBySize" class="sortOptionsLabel">Size</label> </li>
+							<li class="sortOptions" ><label  id="sortByPrice" class="sortOptionsLabel">Price</label> </li>
+						</ul>
+
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="thumbnail">
+									<img class="tooltipImages" src="images/default.png" width="200px" height="100px" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
+									<div class="caption">
+									<h3>Thumbnail label</h3>
+									
+									<p><a href="#" class="btn btn-primary btn-sm" role="button">Add to cart</a>
+								</div>
+								</div>
+
+
+							</div>
+
+							<div class="col-md-4">
+								<div class="thumbnail">
+									<img class="tooltipImages" src="images/default.png" width="200px" height="100px" data-toggle="tooltip" data-placement="right" title="Tooltip on left">
+									<div class="caption">
+									<h3>Thumbnail label</h3>
+									
+									<p><a href="#" class="btn btn-primary btn-sm" role="button">Add to cart</a>
+								</div>
+								</div>
+
+
+							</div>
+							
+							<div class="col-md-4">
+								<div class="thumbnail">
+									<img class="tooltipImages" src="images/default.png" width="200px" height="100px" data-toggle="tooltip" data-placement="right" title="Tooltip on left">
+									<div class="caption">
+									<h3>Thumbnail label</h3>
+									
+									<p><a href="#" class="btn btn-primary btn-sm" role="button">Add to cart</a>
+								</div>
+								</div>
+
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="thumbnail">
+									<img class="tooltipImages" src="images/default.png" width="200px" height="100px" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
+									<div class="caption">
+									<h3>Thumbnail label</h3>
+									
+									<p><a href="#" class="btn btn-primary btn-sm" role="button">Add to cart</a>
+								</div>
+								</div>
+
+
+							</div>
+
+							<div class="col-md-6">
+								<div class="thumbnail">
+									<img class="tooltipImages" src="images/default.png" width="200px" height="100px" data-toggle="tooltip" data-placement="right" title="Tooltip on left">
+									<div class="caption">
+									<h3>Thumbnail label</h3>
+									
+									<p><a href="#" class="btn btn-primary btn-sm" role="button">Add to cart</a>
+								</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="panel-body">
-					<table class="table table-condensed table-hover table-striped" cellspacing="0" id="products">
-				
-				<thead>
-					<tr style="display:none">
-						<td></td>
-						<td></td>
-						<td id="asd" ><strong>ID</strong></td>
-						<td><strong>Name</strong></td>
-						<td><strong>Type</strong></td>
-						<td><strong>Category</strong></td>
-						<td><strong>Price</strong></td>
-						<td><strong>Size</strong></td>
-						<td><strong>Shelf life</strong></td>
-						<td><strong>Weight</strong></td>
-						<td><strong>Image</strong></td>
-					</tr>
-				</thead>
-				<tbody>
-				<tr>
-						<td><a href="product.remove?id=3" onclick="return confirm('Are you sure you want to delete Kings?')"><span class='glyphicon glyphicon-remove'></span></a></td>
-						<td><a href="product.update?id=3"><span style="color:blue;" class='glyphicon glyphicon-pencil'></span></a></td>
-						<td>3</td>
-						<td>Kings</td>
-						<td>Premium</td>
-						<td>All About Nuts</td>
-						<td>170</td>
-						<td>Large</td>
-						<td>30</td>
-						<td>150</td>
-						<td><img alt="" src="../images/uploads/" width="50px" height="50px"></td>
-					</tr>
-					
-					
-					<tr>
-						<td><a href="product.remove?id=4" onclick="return confirm('Are you sure you want to delete 567?')"><span class='glyphicon glyphicon-remove'></span></a></td>
-						<td><a href="product.update?id=4"><span style="color:blue;" class='glyphicon glyphicon-pencil'></span></a></td>
-						<td>4</td>
-						<td>567</td>
-						<td>Regular</td>
-						<td>All About Nuts</td>
-						<td>50</td>
-						<td>Small</td>
-						<td>30</td>
-						<td>50</td>
-						<td><img alt="" src="../images/uploads/1455915_10151805903026840_1822484452_n.jpg" width="50px" height="50px"></td>
-					</tr>
-					
-					
-					<tr>
-						<td><a href="product.remove?id=5" onclick="return confirm('Are you sure you want to delete 456456456456456?')"><span class='glyphicon glyphicon-remove'></span></a></td>
-						<td><a href="product.update?id=5"><span style="color:blue;" class='glyphicon glyphicon-pencil'></span></a></td>
-						<td>5</td>
-						<td>456456456456456</td>
-						<td>Regular</td>
-						<td>All About Nuts</td>
-						<td>50</td>
-						<td>Small</td>
-						<td>30</td>
-						<td>50</td>
-						<td><img alt="" src="../images/uploads/default.png" width="50px" height="50px"></td>
-					</tr>
-					
-					
-					<tr>
-						<td><a href="product.remove?id=6" onclick="return confirm('Are you sure you want to delete 456456456456456f?')"><span class='glyphicon glyphicon-remove'></span></a></td>
-						<td><a href="product.update?id=6"><span style="color:blue;" class='glyphicon glyphicon-pencil'></span></a></td>
-						<td>6</td>
-						<td>456456456456456f</td>
-						<td>Regular</td>
-						<td>All About Nuts</td>
-						<td>50</td>
-						<td>Small</td>
-						<td>30</td>
-						<td>50</td>
-						<td><img alt="" src="../images/uploads/default.png" width="50px" height="50px"></td>
-					</tr>
-				</tbody>
-				</table>
+			</div>
+
+			<div class="col-md-3">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h6 class="panel-title">Your Cart</h6>
+
+					</div>
+					<div class="panel-body">
+						<label><i>No items</i></label>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -164,20 +169,33 @@
 	<script type="text/javascript" src="bootstrap/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="bootstrap/js/dataTables.bootstrap.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		$('#dataTableSearch').remove();
-	    $('#products').dataTable();
-	    $('#qwe').click(function(){
-	    	$('#asd').click();
+		$(document).ready(function() {
+			$('#dataTableSearch').remove();
+			$('#products').dataTable();
+			$('#sortByName').click(function(){
+				$('#nameSort').click();
+	    	// $('#sortByName').css({"font-weight": "bold"});
 	    });
-	    $('#searchBar').keydown(function(e){
-	    	// alert(e.text);
-	    	// $('#dataTableSearch').trigger(e.which);
-	    	$('#dataTableSearch').val($('#searchBar').val());
-	    	$('#dataTableSearch').focus();
-	    	// $('#searchBar').focus();
-	    });
-	} );
+			$('#sortByCategory').click(function(){
+				$('#categorySort').click();
+			});
+			$('#sortByType').click(function(){
+				$('#typeSort').click();
+			});
+			$('#sortBySize').click(function(){
+				$('#sizeSort').click();
+			});
+			$('#sortByPrice').click(function(){
+				$('#priceSort').click();
+			});
+			$('.sortOptionsLabel').click(function(){
+				$('.sortOptionsLabel').css({"font-weight": "normal"});
+				$(this).css({"font-weight": "bold"});
+			});
+			$('.tooltipImages').tooltip();
+
+
+		} );
 	</script>
 </body>
 </html>
