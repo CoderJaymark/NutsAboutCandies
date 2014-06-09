@@ -1,6 +1,7 @@
 package com.nutsaboutcandies.servlets;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.nutsaboutcandies.dao.InventoryDao;
-import com.nutsaboutcandies.model.Product;
 import com.nutsaboutcandies.user.Cart;
 
 /**
- * Servlet implementation class RemoveCart
+ * Servlet implementation class UpdateCart
  */
-@WebServlet("/cart.remove")
-public class RemoveCart extends HttpServlet {
+@WebServlet("/cart.update")
+public class UpdateCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveCart() {
+    public UpdateCart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +31,37 @@ public class RemoveCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		InventoryDao dao = new InventoryDao();
-		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(60*60);
-		Cart cart = (Cart)session.getAttribute("cart");
-		int id = Integer.parseInt(request.getParameter("id"));
-		Product p = cart.getProduct(id);
-		
-		cart.removeProduct(id);
-		dao.addStock(p.getId(), p.getStock());
-		session.setAttribute("cart", cart);
-		
-		String referer = request.getHeader("Referer");
-		referer = referer.substring(referer.lastIndexOf('/') + 1, referer.length());
-		
-		response.sendRedirect(referer);
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String[] in = request.getParameterValues("quantities");
+		int[] quantities = new int[in.length];
+		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(60*60);
+		Cart cart = (Cart)session.getAttribute("cart");
+		for(int i  = 0; i < in.length; i++) {
+			quantities[i] = Integer.parseInt(in[i]);
+		}
+		
+//		int[] q = (int[]) request.getSession().getAttribute("quantities");
+		int[] q = cart.getQuantities();
+		System.out.println(Arrays.equals(q, quantities));
+		if(Arrays.equals(q, quantities)) {
+			response.sendRedirect("cart.jsp");
+			return;
+		}
+		for(int i = 0; i < q.length; i++) {
+			System.out.print(q[i] + " : ");
+			System.out.println(quantities[i]);
+		}
+		cart.updateStock(quantities);
+		session.setAttribute("cart", cart);
+		response.sendRedirect("cart.jsp");
+		
 	}
 
 }

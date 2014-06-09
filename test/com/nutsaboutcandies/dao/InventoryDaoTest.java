@@ -63,8 +63,8 @@ public class InventoryDaoTest {
 	
 	@Test
 	public void retrieveProductsTest() {
-		assertNotNull(inventoryDao.retrieveProducts());
-		assertEquals(26, inventoryDao.retrieveProducts().size());
+		assertNotNull(inventoryDao.retrieveProducts(true));
+		assertEquals(26, inventoryDao.retrieveProducts(true).size());
 	}
 	
 	@Test

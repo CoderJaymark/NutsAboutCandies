@@ -1,8 +1,8 @@
 package com.nutsaboutcandies.user;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +13,11 @@ public class Cart {
 	private Timestamp purchaseDate;
 	private List<Product> products = new ArrayList<Product>();
 	private int numberOfItems;
-	private int total;
+	private double total;
+	private double subtotal;
+	private double deliveryCharge = 50.0;
+	private double discount;
+	private int[] quantities;
 
 	public User getOwner() {
 		return owner;
@@ -47,13 +51,8 @@ public class Cart {
 		return numberOfItems;
 	}
 	
-	public int getTotal() {
-		int total = 0;
-		for(Product p : getProducts()) {
-			total += p.getStock() * p.getPrice().intValue();
-		}
-		
-		return total;
+	public double getTotal() {
+	 return 0;
 	}
 	
 	public void addProduct(Product p) {
@@ -73,5 +72,58 @@ public class Cart {
 	public Product getProduct(int id) {
 		return products.get(id);
 	}
+	
+	public double getSubtotal() {
+		double subtotal = 0;
+		for(Product p : getProducts()) {
+			subtotal += p.getStock() * p.getPrice().intValue();
+		}
+		this.subtotal = subtotal;
+		return subtotal;
+	}
+	
+	public void updateStock(int[] updatedStocks) {
+		int counter = 0;
+		for(int i = 0; i < updatedStocks.length; i++) {
+			products.get(i).setStock(updatedStocks[counter++]);
+		}
+		
+	}
+	
+	public int[] getQuantities() {
+		int[] quantities = new int[getProducts().size()];
+		for(int i=0;i<quantities.length;i++) {
+			quantities[i] = getProducts().get(i).getStock();
+		}
+		return quantities;
+	}
+	
+	public double getDiscount() {
+		System.out.println(subtotal);
+		if(subtotal>=2000) {
+			discount = subtotal * 0.05;
+			System.out.println(discount);
+			subtotal -= discount;
+		}
+		return discount;
+	}
+	
+	public double getDeliveryCharge() {
+		int totalWeight = 0;
+		for(Product p : products ) {
+			totalWeight += p.getWeight();
+		}
+		
+		
+		if(totalWeight > 500) {
+			int excessWeight = totalWeight - 500;
+			do{
+				deliveryCharge += 10;
+				excessWeight-=100;
+			} while(excessWeight >= 0);
+		}
+		return deliveryCharge;
+	}
+	
 
 }

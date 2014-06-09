@@ -208,7 +208,7 @@ public class InventoryDao {
 		return true;
 	}
 
-	public List<Product> retrieveProducts() {
+	public List<Product> retrieveProducts(boolean all) {
 		query = "SELECT * FROM products";
 		List<Product> products = new ArrayList<Product>();
 		Product product;
@@ -228,7 +228,14 @@ public class InventoryDao {
 				product.setSize(size);
 				product.setStock(result.getInt(9));
 				product.setImage(result.getString(10));
-				products.add(product);
+				if(all)
+					products.add(product);
+				else {
+					if(product.getStock() > 0) {
+						products.add(product);
+					}
+				}
+					
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -340,8 +347,7 @@ public class InventoryDao {
 	}
 	
 	public boolean addStock(int product_id, int stock) {
-		if(getStock(product_id) <= 0) 
-			return false;
+		
 		query = "UPDATE products SET stock = stock + ? where product_id = ?";
 		try {
 			preparedStatement = connection.prepareStatement(query);

@@ -26,7 +26,7 @@ public class UserDao {
 			preparedStatement.setString(4, HashMaker.makeHash(user.getPassword()));
 			preparedStatement.setString(5, user.getContactNumber());
 			preparedStatement.setInt(6, address_id);
-			preparedStatement.setInt(7, 1);
+			preparedStatement.setInt(7, user.getRoleId());
 			preparedStatement.setTimestamp(8, user.getRegistrationTime());
 			preparedStatement.setTimestamp(9, user.getLastAccessTime());
 			preparedStatement.executeUpdate();
